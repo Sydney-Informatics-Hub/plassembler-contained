@@ -1,0 +1,22 @@
+#PBS -P <YOUR_PROJECT>
+#PBS -l select=1:ncpus=4:mem=16gb
+#PBS -l walltime=2:00:00
+#PBS -N job01
+
+module load singularity
+
+### 1 BUILD IMAGE ###
+# First Build only - takes 10 mins, remove after ###
+
+# If these are not set, it defaults to your home folder which will fill up very quickly.
+export SINGULARITY_CACHEDIR=`pwd`
+export SINGULARITY_TMPDIR=`pwd`
+singularity build plassembler.img docker://sydneyinformaticshub/plassembler:v1.6.2
+
+### 2 EXAMPLE WORKFLOW ###
+# Remove the build commands above and build and execute your required plassembler command:
+
+# Execute plassembler 
+# See documentation for parameters: https://github.com/gbouras13/plassembler?tab=readme-ov-file#running-plassembler
+singularity run --bind $data plassembler.img plassembler \
+  --help
