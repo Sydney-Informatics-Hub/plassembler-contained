@@ -32,5 +32,11 @@ RUN git clone https://github.com/rrwick/Unicycler.git && \
   cd Unicycler && \
   python3 setup.py install
 
+# Install FLye version 2.9.3
+RUN git clone https://github.com/fenderglass/Flye && \
+  cd Flye && \
+  make
+
+
 # Run Plassembler
 CMD ["plassembler", "--help"]
